@@ -44,7 +44,7 @@ public class HelloWorldService {
     @GET
     public Response healthz(){
         if (healthy)
-            return  Response.ok("OK").build();
+            return  Response.ok("OK1").build();
         else
             return  Response.status(404).build();
     }
