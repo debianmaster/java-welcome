@@ -11,28 +11,64 @@ import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import java.net.InetAddress;
+import java.util.Properties;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import java.net.UnknownHostException;
 
-@Path("/hello")
+@Path("/api")
 public class HelloWorldService {
- 
+
+
+
+    boolean healthy=true;
+    String hostname="";
+    public HelloWorldService() {
+        try {
+            hostname = InetAddress.getLocalHost().getHostName().toString();
+        } catch (UnknownHostException ex) {
+            hostname = "error";
+        }
+    }
+
+    @Path("/")
+    @GET
+    public String home(){
+        return hostname;
+    }
+
+    @Path("/healthz")
+    @GET
+    public Response healthz(){
+        if (healthy)
+            return  Response.ok("OK").build();
+        else
+            return  Response.status(404).build();
+    }
+
+    @Path("/cancer")
+    @GET
+    public String cancer(){
+        healthy=false;
+        return "Killed "+hostname;
+    }
+
+    @Path("/dbtest")
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	public Response getMsg() {
-
-
 		List<Customer> c = new ArrayList<Customer>();
-		
 		Connection con = null;
-		
 		try {
+            Properties prop = new Properties();
+            prop.load(getClass().getClassLoader().getResourceAsStream("application.properties"));
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/dev", "root",
-					"");
+					"jdbc:mysql://"+prop.getProperty("app.mysql_host")+":3306/"+prop.getProperty("app.mysql_database"), prop.getProperty("app.mysql_user"),
+                    prop.getProperty("app.mysql_password"));
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from customer");
 			while (rs.next()) {
