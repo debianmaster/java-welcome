@@ -31,8 +31,8 @@ public class HelloWorldService {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/dev", "root",
-					"");
+					"jdbc:mysql://mysql:3306/sampledb", "app_user",
+					"dev_password");
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from customer");
 			while (rs.next()) {
