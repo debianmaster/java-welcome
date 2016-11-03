@@ -24,8 +24,8 @@ public class HelloWorldService {
 
 
 
-    boolean healthy=true;
-    String hostname="";
+    static boolean healthy=true;
+    static String hostname="";
     public HelloWorldService() {
         try {
             hostname = InetAddress.getLocalHost().getHostName().toString();
