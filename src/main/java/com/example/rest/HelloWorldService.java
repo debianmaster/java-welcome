@@ -46,7 +46,7 @@ public class HelloWorldService {
     @GET
     public Response healthz(){
         if (healthy)
-            return  Response.ok("OK").build();
+            return  Response.ok("OK1").build();
         else
             return  Response.status(404).build();
     }
@@ -72,6 +72,7 @@ public class HelloWorldService {
 			prop.load(input);
 			System.out.println(prop.getProperty("app.mysql_host")+prop.getProperty("app.mysql_database")+prop.getProperty("app.mysql_user")+prop.getProperty("app.mysql_password"));
 			Class.forName("com.mysql.jdbc.Driver");
+		    System.out.println(prop.getProperty("app.mysql_host")+prop.getProperty("app.mysql_database")+prop.getProperty("app.mysql_user")+prop.getProperty("app.mysql_password"));	
 			con = DriverManager.getConnection(
 					"jdbc:mysql://"+prop.getProperty("app.mysql_host")+":3306/"+prop.getProperty("app.mysql_database"),
 					prop.getProperty("app.mysql_user"),
