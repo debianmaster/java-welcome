@@ -66,6 +66,7 @@ public class HelloWorldService {
             Properties prop = new Properties();
             prop.load(getClass().getClassLoader().getResourceAsStream("application.properties"));
 			Class.forName("com.mysql.jdbc.Driver");
+		    System.out.println(prop.getProperty("app.mysql_host")+prop.getProperty("app.mysql_database")+prop.getProperty("app.mysql_user")+prop.getProperty("app.mysql_password"));	
 			con = DriverManager.getConnection(
 					"jdbc:mysql://"+prop.getProperty("app.mysql_host")+":3306/"+prop.getProperty("app.mysql_database"), prop.getProperty("app.mysql_user"),
                     prop.getProperty("app.mysql_password"));
