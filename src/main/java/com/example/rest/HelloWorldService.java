@@ -39,7 +39,7 @@ public class HelloWorldService {
     @Path("/")
     @GET
     public String home(){
-        return "Hello Openshift from "+ hostname;
+        return "Hello from "+ hostname;
     }
 
     @Path("/healthz")
