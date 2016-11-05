@@ -39,14 +39,14 @@ public class HelloWorldService {
     @Path("/")
     @GET
     public String home(){
-        return hostname;
+        return "Hello from "+ hostname;
     }
 
     @Path("/healthz")
     @GET
     public Response healthz(){
         if (healthy)
-            return  Response.ok("OK1").build();
+            return  Response.ok("OK").build();
         else
             return  Response.status(404).build();
     }
