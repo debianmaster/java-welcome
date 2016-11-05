@@ -18,6 +18,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import java.net.UnknownHostException;
+import java.io.InputStream;
+import java.io.FileInputStream;
 
 @Path("/api")
 public class HelloWorldService {
@@ -64,7 +66,8 @@ public class HelloWorldService {
 		Connection con = null;
 		try {
             Properties prop = new Properties();
-			prop.load(getClass().getClassLoader().getResourceAsStream("/opt/config/application.properties"));
+			InputStream input = new FileInputStream("/opt/config/application.properties");
+			prop.load(input);
 			System.out.println(prop.getProperty("app.mysql_host")+prop.getProperty("app.mysql_database")+prop.getProperty("app.mysql_user")+prop.getProperty("app.mysql_password"));
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(
