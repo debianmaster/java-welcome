@@ -1,5 +1,8 @@
-local_source_dir=/usr/local/tomcat/work
-deploy_dir=/usr/local/tomcat/webapps
+#local_source_dir=/usr/local/tomcat/work
+#deploy_dir=/usr/local/tomcat/webapps
+
+local_source_dir=/opt/wildfly/source
+mkdir -p $local_source_dir
 
 cp -ad /tmp/src/* $local_source_dir
 cd $local_source_dir
