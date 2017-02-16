@@ -1,6 +1,6 @@
 FROM tomcat:8
 
-RUN apt-get install  curl
+RUN apt-get install  maven
 
 RUN chown -R 1001:1001 /usr/local/tomcat
 
