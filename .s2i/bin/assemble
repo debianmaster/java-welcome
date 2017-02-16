@@ -3,5 +3,5 @@ deploy_dir=/usr/local/tomcat/webapps
 
 cp -ad /tmp/src/* $local_source_dir
 cd $local_source_dir
-/usr/bin/mvn clean package
+maven clean package
 cp $local_source_dir/target/*.war $deploy_dir >& /dev/null
