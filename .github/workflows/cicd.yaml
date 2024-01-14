@@ -1,0 +1,28 @@
+
+name: Java Welcome CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Java application
+      run: mvn clean package
+    - name: Build the Docker image
+      run: docker build -t java-welcome .
+    - name: Push the Docker image
+      run: docker push java-welcome
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v3
+    - name: Deploy the application to Kubernetes
+      run: kubectl apply -f deployment.yaml

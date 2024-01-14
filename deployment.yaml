@@ -1,0 +1,22 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-welcome
+  labels:
+    app: java-welcome
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: java-welcome
+  template:
+    metadata:
+      labels:
+        app: java-welcome
+    spec:
+      containers:
+      - name: java-welcome
+        image: java-welcome:latest
+        ports:
+        - containerPort: 8080
