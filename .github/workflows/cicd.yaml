@@ -15,7 +15,7 @@ jobs:
     - name: Build the Java application
       run: mvn clean package
     - name: Build the Docker image
-      run: docker build -t java-welcome .
+      run: docker build -t java-welcome --build-arg LANG=java .
     - name: Push the Docker image
       run: docker push java-welcome
 
